@@ -10,7 +10,31 @@
   <ItemGroup>
     <Folder Include="1_Domain\" />
     <Folder Include="3_GateWay\" />
-    <Folder Include="4_AI\" />
+    <Folder Include="4_AI\Trained_Model\converted_savedmodel\model.savedmodel\assets\" />
+  </ItemGroup>
+	
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="4.0.2" />
+    <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="4.0.2" />
+    <PackageReference Include="Microsoft.ML.TensorFlow" Version="4.0.2" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.10.0" />
+    <PackageReference Include="TensorFlow.NET" Version="0.20.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="4_AI\Trained_Model\converted_savedmodel\labels.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="4_AI\Trained_Model\converted_savedmodel\model.savedmodel\saved_model.pb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="4_AI\Trained_Model\InputImages\JETSKI.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="4_AI\Trained_Model\InputImages\TUK.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
