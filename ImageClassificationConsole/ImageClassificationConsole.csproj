@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="1_Domain\" />
-    <Folder Include="3_GateWay\" />
     <Folder Include="4_AI\Trained_Model\converted_savedmodel\model.savedmodel\assets\" />
   </ItemGroup>
 	
@@ -27,6 +25,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="4_AI\Trained_Model\converted_savedmodel\model.savedmodel\saved_model.pb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="4_AI\Trained_Model\InputImages\EW.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="4_AI\Trained_Model\InputImages\JETSKI.png">

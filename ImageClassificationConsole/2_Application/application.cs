@@ -15,11 +15,14 @@ namespace ImageClassificationConsole._2_Application
         public double CalculatePrecision()
         { return 0; }
         public double CalculateF1()
-        { return 0; }
+        { return 100; }
         public double CalculateRecall()
         { return 0; }
         public double SelectPicture()
         { return 0; }
+
+        public String ClassifyPicture()
+        { return ""; }
 
     }
 }

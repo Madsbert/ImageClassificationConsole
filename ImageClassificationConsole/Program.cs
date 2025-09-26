@@ -4,10 +4,12 @@ using System.IO;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Tensorflow;
+using ImageClassificationConsole._1_Domain;
+using ImageClassificationConsole._4_AI;
 
 namespace ImageClassificationConsole
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -22,7 +24,7 @@ namespace ImageClassificationConsole
                 var modelFolder = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "model.savedmodel"); //"modeldir
                 var modelFile = Path.Combine(modelFolder, "saved_model.pb"); // The actual model file
                 var labelsPath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "labels.txt");
-                var imagePath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "InputImages", "TUK.png");
+                var imagePath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "InputImages", "EW.png");
 
                 // Check if files exist
                 Console.WriteLine($"Model folder exists: {Directory.Exists(modelFolder)}");
