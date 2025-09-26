@@ -26,7 +26,7 @@ namespace ImageClassificationConsole._3_GateWay
 
             public Service()
             {
-                _imageClassifier = new ImageClassifier("Model", "labels.txt");
+                _imageClassifier = new ImageClassifier();
 
             }
 

@@ -27,19 +27,30 @@ namespace ImageClassificationConsole._4_AI
         /// </summary>
         /// <param name="modelPath">Path to the directory containing the TensorFlow model files</param>
         /// <param name="labelsPath">Path to the text file containing class labels (one per line)</param>
-        public ImageClassifier(string modelPath, string labelsPath)
+        public ImageClassifier() //string modelPath, string labelsPath
         {
             _mlContext = new MLContext();
+
+            var appDir = AppContext.BaseDirectory;
+            Console.WriteLine($"App base directory: {appDir}");
+
+            // FIXED: Go up to project root from bin\Debug\net9.0\
+            var projectRoot = Path.GetFullPath(Path.Combine(appDir, @"..\..\..\"));
+
+            var modelFolder = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "model.savedmodel"); //"modeldir
+            var modelFile = Path.Combine(modelFolder, "saved_model.pb"); // The actual model file
+            var labelsPath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "labels.txt");
+
             _labels = File.ReadAllLines(labelsPath);
 
             // Validate that model directory exists
-            if (!Directory.Exists(modelPath))
+            if (!Directory.Exists(modelFolder))
             {
-                throw new DirectoryNotFoundException($"Model folder not found: {modelPath}");
+                throw new DirectoryNotFoundException($"Model folder not found: {modelFolder}");
             }
 
             // Load TensorFlow model
-            var tensorFlowModel = _mlContext.Model.LoadTensorFlowModel(modelPath);
+            var tensorFlowModel = _mlContext.Model.LoadTensorFlowModel(modelFolder);
 
             // Define the image processing and model scoring pipeline
             var pipeline = _mlContext.Transforms.LoadImages(
