@@ -6,6 +6,11 @@ namespace UnitTest
 {
     public class UnitTest1
     {
+        [Fact]
+        public void DummyTest()
+        {
+            Assert.True(true);
+        }
 
         //Arrenge 
         Application _application= new Application();
@@ -20,7 +25,6 @@ namespace UnitTest
             var actualResult = _application.CalculateAccuracy();
             //Assert
             Assert.Equal(expectedResult, actualResult, 0.02);
-
         }
 
 

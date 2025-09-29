@@ -34,21 +34,28 @@ namespace ImageClassificationConsole._4_AI
             var appDir = AppContext.BaseDirectory;
             Console.WriteLine($"App base directory: {appDir}");
 
-            var projectRoot = Path.GetFullPath(Path.Combine(appDir, @"..\..\..\"));
+            // Navigate into 4_AIShared/Resources
+            var sharedFolder = Path.GetFullPath(Path.Combine(appDir, @"..\..\..\..\4_AIShared\Resources"));
 
-            var modelFolder = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "model.savedmodel"); 
-            var modelFile = Path.Combine(modelFolder, "saved_model.pb"); // The actual model file
-            var labelsPath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "labels.txt");
+            // Model + labels
+            var modelFolder = Path.Combine(sharedFolder, "converted_savedmodel", "model.savedmodel");
+
+            var labelsPath = Path.Combine(sharedFolder, "converted_savedmodel", "labels.txt");
+            //C:\Users\jakob\source\repos\ImageClassificationConsole1\ImageClassificationConsole\4_AI\Trained_Model\converted_savedmodel\labels.txt
+            //C:\Users\jakob\Source\Repos\ImageClassificationConsole1\ImageClassificationConsole\4_AI\Trained_Model\converted_savedmodel\labels.txt
+
+            // Debug print
+            Console.WriteLine($"Model Folder Path: {modelFolder}");
+            Console.WriteLine($"Labels Path: {labelsPath}");
+            Console.WriteLine("This is the correct path: (right click copy path on label file) " +
+                "\nC:\\Users\\jakob\\source\\repos\\ImageClassificationConsole1\\ImageClassificationConsole\\4_AI\\Trained_Model\\converted_savedmodel\\labels.txt");
+
+            if (!File.Exists(labelsPath))
+                throw new FileNotFoundException($"Labels file not found at: {labelsPath}");
 
             _labels = File.ReadAllLines(labelsPath);
 
-            // Validate that model directory exists
-            if (!Directory.Exists(modelFolder))
-            {
-                throw new DirectoryNotFoundException($"Model folder not found: {modelFolder}");
-            }
-
-            // Load TensorFlow model
+            // Load TensorFlow model (expects folder containing pb + variables + assets)
             var tensorFlowModel = _mlContext.Model.LoadTensorFlowModel(modelFolder);
 
             // Define the image processing and model scoring pipeline
