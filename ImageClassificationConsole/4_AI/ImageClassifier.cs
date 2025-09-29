@@ -34,10 +34,9 @@ namespace ImageClassificationConsole._4_AI
             var appDir = AppContext.BaseDirectory;
             Console.WriteLine($"App base directory: {appDir}");
 
-            // FIXED: Go up to project root from bin\Debug\net9.0\
             var projectRoot = Path.GetFullPath(Path.Combine(appDir, @"..\..\..\"));
 
-            var modelFolder = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "model.savedmodel"); //"modeldir
+            var modelFolder = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "model.savedmodel"); 
             var modelFile = Path.Combine(modelFolder, "saved_model.pb"); // The actual model file
             var labelsPath = Path.Combine(projectRoot, "4_AI", "Trained_Model", "converted_savedmodel", "labels.txt");
 
