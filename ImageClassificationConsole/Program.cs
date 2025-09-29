@@ -27,9 +27,12 @@ namespace ImageClassificationConsole
 
             //Console.WriteLine(application.CalculatePrecision("Truck"));
 
-            //Console.WriteLine(application.CalculateF1("Truck"));
+            Console.WriteLine(application.CalculateF1("Truck"));
+            //Console.WriteLine(application.CalculateF1("Car"));
 
-            Console.WriteLine("Macro F1: " + application.CalculateMacroF1());
+
+
+            //Console.WriteLine("Macro F1: " + application.CalculateMacroF1());
 
         }
     }

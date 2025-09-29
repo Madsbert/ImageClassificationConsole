@@ -14,8 +14,10 @@ namespace ImageClassificationConsole._2_Application
     {
         AbstractClassifierService _abstractClassifierService = AbstractClassifierService.Create();
 
-
- 
+        /// <summary>
+        /// Calculate the accuracy of the AI model by classifying images from test folders and comparing predictions to actual labels.
+        /// </summary>
+        /// <returns></returns>
         public double CalculateAccuracy()
         {
             string baseDirectory = AppContext.BaseDirectory;
@@ -25,9 +27,9 @@ namespace ImageClassificationConsole._2_Application
             string resourcesPathMotorCycle = Path.Combine(projectRoot, "Resources", "Model_Test Motorcycle");
 
 
-            int CarActualCount = 0;
-            int TruckActualCount = 0;
-            int MotorcycleActualCount = 0;
+            int carActualCount = 0;
+            int truckActualCount = 0;
+            int motorcycleActualCount = 0;
 
            
 
@@ -48,7 +50,7 @@ namespace ImageClassificationConsole._2_Application
                     var result = _abstractClassifierService.ClassifyImage(imagePath);
                     if (result.ClassName == "Car")
                     {
-                        CarActualCount++;
+                        carActualCount++;
                     }
                     Console.WriteLine("-----------New-----------");
                     Console.WriteLine($"Image: {Path.GetFileName(imagePath)} - Predicted: {result.ClassName}");
@@ -82,7 +84,7 @@ namespace ImageClassificationConsole._2_Application
                     var result = _abstractClassifierService.ClassifyImage(imagePath);
                     if (result.ClassName == "Truck")
                     {
-                        TruckActualCount++;
+                        truckActualCount++;
                     }
                     Console.WriteLine("-----------New-----------");
                     Console.WriteLine($"Image: {Path.GetFileName(imagePath)} - Predicted: {result.ClassName}");
@@ -117,7 +119,7 @@ namespace ImageClassificationConsole._2_Application
                     var result = _abstractClassifierService.ClassifyImage(imagePath);
                     if (result.ClassName == "Motorcycle")
                     {
-                        MotorcycleActualCount++;
+                        motorcycleActualCount++;
                     }
                     Console.WriteLine("-----------New-----------");
                     Console.WriteLine($"Image: {Path.GetFileName(imagePath)} - Predicted: {result.ClassName}");
@@ -133,9 +135,9 @@ namespace ImageClassificationConsole._2_Application
                 }
             }
 
-            double carRsult = (double)CarActualCount / carImageFiles.Length;
-            double truckRsult = (double)TruckActualCount / TruckImageFiles.Length;
-            double motorcycleRsult = (double)MotorcycleActualCount / MotorcycleImageFiles.Length;
+            double carRsult = (double)carActualCount / carImageFiles.Length;
+            double truckRsult = (double)truckActualCount / TruckImageFiles.Length;
+            double motorcycleRsult = (double)motorcycleActualCount / MotorcycleImageFiles.Length;
 
             Console.WriteLine("Accuracy Car: " + carRsult);
             Console.WriteLine("Accuracy Truck: " + truckRsult);
@@ -147,12 +149,17 @@ namespace ImageClassificationConsole._2_Application
             return totalAccuracy;
         }
 
-
+        /// <summary>
+        /// Calculate the recall for a specific class by classifying images from the corresponding test folder and comparing predictions to actual labels.
+        /// recall = true positive / (true positive + false negative)
+        /// </summary>
+        /// <param name="selectedClassName"></param>
+        /// <returns></returns>
         public double CalculateRecall(string selectedClassName)
         {
             double recall = 0;
             int truePositive = 0;
-            int falsePositive = 0;
+            int falseNegatives = 0;
 
 
             string baseDirectory = AppContext.BaseDirectory;
@@ -177,7 +184,7 @@ namespace ImageClassificationConsole._2_Application
                     }
                     else
                     {
-                        falsePositive++;
+                        falseNegatives++;
                     }   
                 }
                 catch (Exception ex)
@@ -186,16 +193,25 @@ namespace ImageClassificationConsole._2_Application
                 }
             }
             Console.WriteLine("TP: " + truePositive);
-            Console.WriteLine("FP: " + falsePositive);
+            Console.WriteLine("FP: " + falseNegatives);
 
-            recall = (double)truePositive / (truePositive + falsePositive);
+            recall = (double)truePositive / (truePositive + falseNegatives);
             return recall;
         }
-
+        /// <summary>
+        /// Average recall across all classes (Car, Truck, Motorcycle)
+        /// </summary>
+        /// <returns></returns>
         public double CalculateMacroRecall()
         {
             return (CalculateRecall("Car") + CalculateRecall("Truck") + CalculateRecall("Motorcycle")) / 3;
         }
+        /// <summary>
+        /// Calculate the precision for a specific class by classifying images from the corresponding test folder and comparing predictions to actual labels.
+        /// precision = true positive / (true positive + false positive)
+        /// </summary>
+        /// <param name="selectedClassName"></param>
+        /// <returns></returns>
         public double CalculatePrecision(string selectedClassName)
         {
 
@@ -298,10 +314,20 @@ namespace ImageClassificationConsole._2_Application
             return precision;
         }
 
+        /// <summary>
+        /// Average precision across all classes (Car, Truck, Motorcycle)
+        /// </summary>
+        /// <returns></returns>
         public double CalculateMacroPrecision()
         {
             return (CalculatePrecision("Car") + CalculatePrecision("Truck") + CalculatePrecision("Motorcycle")) / 3;
         }
+
+        /// <summary>
+        /// Calculate the F1 score for a specific class using precision and recall.
+        /// </summary>
+        /// <param name="selectedClassName"></param>
+        /// <returns></returns>
         public double CalculateF1(string selectedClassName)
         {
             double f1 = 0;
@@ -312,15 +338,26 @@ namespace ImageClassificationConsole._2_Application
 
             return f1;
         }
-        
+
+        /// <summary>
+        /// average F1 score across all classes (Car, Truck, Motorcycle)
+        /// </summary>
+        /// <returns></returns>
         public double CalculateMacroF1()
         {
             return (CalculateF1("Car") + CalculateF1("Truck") + CalculateF1("Motorcycle")) / 3;
         }
 
-        public double SelectPicture()
-        { return 0; }
-
+        /// <summary>
+        /// Classifies the image at the specified file path and returns the classification result.
+        /// </summary>
+        /// <remarks>This method uses an abstract classification service to analyze the image and
+        /// determine its classification.  Ensure that the provided image path is accessible and points to a valid image
+        /// file.</remarks>
+        /// <param name="SelectedImagePath">The file path of the image to classify. This must be a valid path to an image file.</param>
+        /// <returns>A <see cref="ClassificationResult"/> object containing the classification details, including the class name,
+        /// confidence score, and class index.</returns>
+        /// <exception cref="ApplicationException">Thrown if an error occurs during the classification process.</exception>
         public ClassificationResult ClassifyPicture(string SelectedImagePath)
         {
             try
