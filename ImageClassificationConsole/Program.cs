@@ -15,9 +15,21 @@ namespace ImageClassificationConsole
         static void Main(string[] args)
         {
             //test
-            application application = new application();
+            Application application = new Application();
 
-            application.ClassifyPicture("C:\\Users\\jakob\\Source\\Repos\\ImageClassificationConsole\\ImageClassificationConsole\\4_AI\\Trained_Model\\InputImages\\græs.png");
+            //application.ClassifyPicture("C:\\Users\\jakob\\Source\\Repos\\ImageClassificationConsole\\ImageClassificationConsole\\4_AI\\Trained_Model\\InputImages\\græs.png");
+            //Console.WriteLine("Total Accuracy: " + application.CalculateAccuracy());
+
+            //Console.WriteLine("Car Recall: " + application.CalculateRecall("Car"));
+            //Console.WriteLine("Truck Recall: " + application.CalculateRecall("Truck"));
+            //Console.WriteLine("Motorcycle Recall: " + application.CalculateRecall("Motorcycle"));
+            //Console.WriteLine("Macro-Average Recall: " + application.CalculateMacroRecall());
+
+            //Console.WriteLine(application.CalculatePrecision("Truck"));
+
+            //Console.WriteLine(application.CalculateF1("Truck"));
+
+            Console.WriteLine("Macro F1: " + application.CalculateMacroF1());
 
         }
     }
