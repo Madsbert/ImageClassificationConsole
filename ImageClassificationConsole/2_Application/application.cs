@@ -37,6 +37,7 @@ namespace ImageClassificationConsole._2_Application
                 Console.WriteLine($"Class: {result.ClassName}");
                 Console.WriteLine($"Confidence Score: {result.ConfidenceScore:P2}");
                 Console.WriteLine($"Class Index: {result.ClassIndex}");
+                
 
                 return result;
             }
