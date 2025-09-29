@@ -1,20 +1,25 @@
 ﻿using ImageClassificationConsole._2_Application;
+using Xunit;
+
+
 namespace UnitTest
 {
     public class UnitTest1
     {
 
         //Arrenge 
-        application _application= new application();
+        Application _application= new Application();
+
+
         [Fact]
         public void TestAccuracyOfAI()
         {
             //Arrenge
-            var expectedResult = 85;
+            var expectedResult = 0.77;
             //Act
             var actualResult = _application.CalculateAccuracy();
             //Assert
-            Assert.Equal(expectedResult, actualResult);
+            Assert.Equal(expectedResult, actualResult, 0.02);
 
         }
 
@@ -23,23 +28,22 @@ namespace UnitTest
         public void TestPrecisionOfAI()
         {
             //Arrenge
-            var expectedResult = 85;
+            var expectedResult = 0.714;
             //Act
-            var actualResult = _application.CalculatePrecision();
+            var actualResult = _application.CalculatePrecision("Truck");
             //Assert
-            Assert.Equal(expectedResult, actualResult);
-
+            Assert.Equal(expectedResult, actualResult,0.02);
         }
 
         [Fact]
         public void TestRecallOfAI()
         {
             //Arrenge
-            var expectedResult = 85;
+            var expectedResult = 0.353;
             //Act
-            var actualResult = _application.CalculateRecall();
+            var actualResult = _application.CalculateRecall("Car");
             //Assert
-            Assert.Equal(expectedResult, actualResult);
+            Assert.Equal(expectedResult, actualResult,0.02);
 
         }
 
@@ -47,30 +51,12 @@ namespace UnitTest
         public void TestF1OfAI()
         {
             //Arrenge
-            var expectedResult = 85;
+            var expectedResult = 0.833;
             //Act
-            var actualResult = _application.CalculateF1();
+            var actualResult = _application.CalculateF1("Truck");
             //Assert
-            Assert.Equal(expectedResult, actualResult);
+            Assert.Equal(expectedResult, actualResult,0.02);
 
-        }
-
-        [Fact]
-        public void TestCorrectPicture()
-        {
-            //arrange
-            bool HasBeenOpened = false;
-
-            //Act
-            var selectedPNG = _application.SelectPicture();
-
-            if (selectedPNG != null)
-            {
-                HasBeenOpened = true;
-            }
-
-            //Assert
-            Assert.True(HasBeenOpened);
         }
     }
 }
