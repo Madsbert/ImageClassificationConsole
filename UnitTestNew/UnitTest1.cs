@@ -9,7 +9,7 @@ namespace UnitTestNew
         Application _application = new Application();
         
 
-
+        
         [Fact]
         public void TestAccuracyOfAI()
         {
