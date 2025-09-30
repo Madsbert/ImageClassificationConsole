@@ -16,9 +16,12 @@ namespace ImageClassificationWPF.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ViewModel.AIViewModel viewModel = null;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new ViewModel.AIViewModel();
+            this.DataContext = viewModel;
         }
     }
 }
