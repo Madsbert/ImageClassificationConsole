@@ -15,10 +15,10 @@ namespace ImageClassificationConsole
         static void Main(string[] args)
         {
             //test
-            Application application = new Application();
+            //Application application = new Application();
 
             //application.ClassifyPicture("C:\\Users\\jakob\\Source\\Repos\\ImageClassificationConsole\\ImageClassificationConsole\\4_AI\\Trained_Model\\InputImages\\græs.png");
-            Console.WriteLine("Total Accuracy: " + application.CalculateAccuracy());
+            //Console.WriteLine("Total Accuracy: " + application.CalculateAccuracy());
 
             //Console.WriteLine("Car Recall: " + application.CalculateRecall("Car"));
             //Console.WriteLine("Truck Recall: " + application.CalculateRecall("Truck"));
