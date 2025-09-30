@@ -40,15 +40,7 @@ namespace ImageClassificationConsole._4_AI
             // Model + labels
             var modelFolder = Path.Combine(sharedFolder, "converted_savedmodel", "model.savedmodel");
 
-            var labelsPath = Path.Combine(sharedFolder, "converted_savedmodel", "labels.txt");
-            //C:\Users\jakob\source\repos\ImageClassificationConsole1\ImageClassificationConsole\4_AI\Trained_Model\converted_savedmodel\labels.txt
-            //C:\Users\jakob\Source\Repos\ImageClassificationConsole1\ImageClassificationConsole\4_AI\Trained_Model\converted_savedmodel\labels.txt
-
-            // Debug print
-            Console.WriteLine($"Model Folder Path: {modelFolder}");
-            Console.WriteLine($"Labels Path: {labelsPath}");
-            Console.WriteLine("This is the correct path: (right click copy path on label file) " +
-                "\nC:\\Users\\jakob\\source\\repos\\ImageClassificationConsole1\\ImageClassificationConsole\\4_AI\\Trained_Model\\converted_savedmodel\\labels.txt");
+            var labelsPath = Path.Combine(sharedFolder, "converted_savedmodel", "labels.txt");        
 
             if (!File.Exists(labelsPath))
                 throw new FileNotFoundException($"Labels file not found at: {labelsPath}");
