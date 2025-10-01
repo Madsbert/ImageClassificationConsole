@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageClassificationWPF.Model
 {
+    /// <summary>
+    /// a class to know what a picture info is
+    /// </summary>
     public class PictureInfo: Bindable
     {
         private string _path;

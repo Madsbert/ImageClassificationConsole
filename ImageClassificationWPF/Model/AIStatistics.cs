@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ImageClassificationWPF.Model
 {
+
+    /// <summary>
+    /// A class to know what AI statistics is with different parameters
+    /// </summary>
     public class AIStatistics : Bindable
     {
 

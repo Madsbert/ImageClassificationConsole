@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace ImageClassificationWPF.Model
 {
+
+    /// <summary>
+    /// a class to notify a change
+    /// </summary>
     public class Bindable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

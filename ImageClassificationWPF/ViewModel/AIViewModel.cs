@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace ImageClassificationWPF.ViewModel
 {
+    /// <summary>
+    /// a class to interact with view
+    /// </summary>
     public class AIViewModel:Bindable
     {
-
-        
         private PictureInfo _currentPictureInfo;
         public PictureInfo CurrentPictureInfo
         {
@@ -39,6 +40,13 @@ namespace ImageClassificationWPF.ViewModel
 
         private ICommandBase _findPictureCmd = null;
 
+        /// <summary>
+        /// A class to handle the handle the button 
+        /// the button to first open the file path for a picture
+        /// then insert the text to the textbox
+        /// then use the application to get the different variables and statistics
+        /// Then make the object PictureInfo and then the AIStatistics
+        /// </summary>
         public ICommandBase FindPictureCmd => _findPictureCmd ?? (
             _findPictureCmd = new FindPictureCommand(
                 (obj) =>

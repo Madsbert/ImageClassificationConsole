@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ImageClassificationWPF.ViewModel
 {
+
+    // A delegate
     class FindPictureCommand : ICommandBase
     {
         public FindPictureCommand(Action<object> executeAction, Func<object, bool> canExecuteAction) : base(executeAction, canExecuteAction) { }
