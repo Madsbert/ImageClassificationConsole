@@ -21,20 +21,58 @@
         <Image HorizontalAlignment="Left" 
                Height="310" Margin="0,10,0,0" Grid.Row="1" 
                VerticalAlignment="Top" Width="397"
-               Source="{Binding CurrentPath.Name}"/>
+               Source="{Binding CurrentPictureInfo.Path}"/>
         
         <TextBox HorizontalAlignment="Center" 
                  TextWrapping="Wrap" 
-                 Text="{Binding CurrentPath.Name, UpdateSourceTrigger=PropertyChanged}"
-                 VerticalAlignment="Center" Width="120"/>
+                 Text="{Binding CurrentPictureInfo.Path, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Center" Width="355" Height="28"/>
         
         <Button Grid.Column="1" Content="Find Picture File" 
                 HorizontalAlignment="Center" Margin="0,29,0,0" 
                 VerticalAlignment="Top" Command="{Binding FindPictureCmd}"/>
 
-        <Label Grid.Column="1" Content="Label" 
-               HorizontalAlignment="Left" Margin="74,10,0,0" 
-               Grid.Row="1" VerticalAlignment="Top" 
-               Height="354" Width="276"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Class: "></Label>
+                <Label Content="{Binding CurrentPictureInfo.Category }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Score: "></Label>
+                <Label Content="{Binding CurrentPictureInfo.Score }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Accuracy: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.Accuracy }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Recall: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.Recall }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Precision: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.Precision }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="F1: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.F1 }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Macro-recall: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.RecallMacro }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Macro-precision: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.PrecisionMacro }"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Macro-F1: "></Label>
+                <Label Content="{Binding CurrentAIStatistics.F1Macro}"></Label>
+            </StackPanel>
+        </StackPanel>
+           
+
+
     </Grid>
 </Window>

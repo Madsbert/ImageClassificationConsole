@@ -1,4 +1,5 @@
-﻿using ImageClassificationWPF.Model;
+﻿using ImageClassificationConsole._2_Application;
+using ImageClassificationWPF.Model;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,23 @@ namespace ImageClassificationWPF.ViewModel
     {
 
         
-        private PicturePath _currentPath;
-        public PicturePath CurrentPath
+        private PictureInfo _currentPictureInfo;
+        public PictureInfo CurrentPictureInfo
         {
-            get=> _currentPath;
+            get=> _currentPictureInfo;
             set
             {
-                _currentPath = value;
+                _currentPictureInfo = value;
+                propertyIsChanged();
+            }
+        }
+        private AIStatistics _currentAIStatistics;
+        public AIStatistics CurrentAIStatistics
+        {
+            get => _currentAIStatistics;
+            set
+            {
+                _currentAIStatistics = value;
                 propertyIsChanged();
             }
         }
@@ -33,12 +44,26 @@ namespace ImageClassificationWPF.ViewModel
                 (obj) =>
                 {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Image Files (.png;.jpg; .jpeg)|.png;.jpg;.jpeg|All Files (.)|.";
+                    //openFileDialog.Filter = "Image Files (.png;.jpg; .jpeg)|.png;.jpg;.jpeg|All Files (.)|.";
                     bool? succes = openFileDialog.ShowDialog();
                     if (succes == true)
                     {
+                        Application application = new Application();
                         string path = openFileDialog.FileName;
-                        CurrentPath = new PicturePath(path);
+                        var result = application.ClassifyPicture(path);
+                        string catagoryName = result.ClassName;
+
+                        double accuracy = application.CalculateAccuracy();
+                        double recall = application.CalculateRecall(catagoryName);
+                        double precision = application.CalculatePrecision(catagoryName);
+                        double f1 = application.CalculateF1(catagoryName);
+                        double recallMacro = application.CalculateMacroRecall();
+                        double precisionMacro = application.CalculateMacroPrecision();
+                        double f1Macro = application.CalculateF1(catagoryName);
+
+
+                        CurrentPictureInfo = new PictureInfo(path, catagoryName, result.ConfidenceScore);
+                        CurrentAIStatistics = new AIStatistics(accuracy,recall, precision, f1, recallMacro,precisionMacro,f1Macro);
                     }
 
                 }, obj=>true)                

@@ -12,4 +12,10 @@
     <ProjectReference Include="..\ImageClassificationConsole\ImageClassificationConsole.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="..\4_AIShared\Resources\**\*.*" Link="Resources\%(RecursiveDir)%(Filename)%(Extension)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	
 </Project>
